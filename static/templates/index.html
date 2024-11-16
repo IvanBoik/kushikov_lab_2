@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Параметры</title>
+</head>
+<body>
+<div>
+    <header style="{display: flex; flex-direction: row;}">
+        <a href="/">Параметры</a>
+        <a href="/graphic">График</a>
+        <a href="/diagrams">Диаграммы</a>
+        <a href="/faks">Возмущения</a>
+    </header>
+
+    <h2>Возмущения</h2>
+    {% for x in range(4) %}
+    <div>
+        <span>R{{ loop.index }}(x)=</span>
+        <input id="faks-{{ loop.index }}-1" type="text">
+        <span>*x^3+</span>
+        <input id="faks-{{ loop.index }}-2" type="text">
+        <span>*x^2+</span>
+        <input id="faks-{{ loop.index }}-3" type="text">
+        <span>*x+</span>
+        <input id="faks-{{ loop.index }}-4" type="text">
+    </div>
+    {% endfor %}
+
+    <h2>Начальные уравнения</h2>
+    {% for x in initial_equations %}
+    <div>
+        <span>{{ x }}</span>
+        <input id="init-eq-{{ loop.index }}" type="text">
+        <span> Ограничение: </span>
+        <input id="restrictions-{{ loop.index }}" type="text" value="1.0">
+    </div>
+    {% endfor %}
+
+    <h2>Уравнения</h2>
+    {% for x in range(55) %}
+    <div>
+        <span>F{{ loop.index }}(x)=</span>
+        <input id="equations-{{ loop.index }}-1" type="text">
+        <span>*x^3+</span>
+        <input id="equations-{{ loop.index }}-2" type="text">
+        <span>*x^2+</span>
+        <input id="equations-{{ loop.index }}-3" type="text">
+        <span>*x+</span>
+        <input id="equations-{{ loop.index }}-4" type="text">
+    </div>
+    {% endfor %}
+
+    <h2>Управление</h2>
+    <span>Статус</span>
+    <input type="text" readonly id="status-input">
+    <button onclick="process()">Вычислить</button>
+</div>
+<script src="/static/js/script.js"></script>
+</body>
+</html>
