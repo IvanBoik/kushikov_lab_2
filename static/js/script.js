@@ -7,27 +7,7 @@ function random() {
 }
 
 if (input.value !== "Выполнено") {
-    for (let i=1; i<5; i++) {
-        for (let j=1; j<5; j++) {
-            let value = random()
-            sessionStorage.setItem("faks-" + i + "-" + j, value)
-            let el = document.getElementById("faks-" + i + "-" + j).value = value
-        }
-    }
-
-    for (let i=1; i<16; i++) {
-        let value = random()
-        sessionStorage.setItem("init-eq-" + i, value)
-        let init_eq_el = document.getElementById("init-eq-" + i).value = value
-    }
-
-    for (let i=1; i<56; i++) {
-        for (let j=1; j<5; j++) {
-            let value = random()
-            sessionStorage.setItem("equations-" + i + "-" + j, value)
-            let el = document.getElementById("equations-" + i + "-" + j).value = value
-        }
-    }
+    refill()
 }
 else {
     for (let i=1; i<5; i++) {
@@ -125,4 +105,30 @@ async function process() {
         const result = await response.json()
         input.value = result.status
         sessionStorage.setItem("status", result.status)
+}
+
+function refill() {
+    for (let i=1; i<5; i++) {
+        for (let j=1; j<5; j++) {
+            let value = random()
+            sessionStorage.setItem("faks-" + i + "-" + j, value)
+            let el = document.getElementById("faks-" + i + "-" + j).value = value
+        }
+    }
+
+    for (let i=1; i<16; i++) {
+        let value = random()
+        sessionStorage.setItem("init-eq-" + i, value)
+        let init_eq_el = document.getElementById("init-eq-" + i).value = value
+    }
+
+    for (let i=1; i<56; i++) {
+        for (let j=1; j<5; j++) {
+            let value = random()
+            sessionStorage.setItem("equations-" + i + "-" + j, value)
+            let el = document.getElementById("equations-" + i + "-" + j).value = value
+        }
+    }
+    sessionStorage.removeItem("status")
+    input.value = ""
 }
