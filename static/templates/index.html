@@ -3,59 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Параметры</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div>
-    <header style="{display: flex; flex-direction: row;}">
-        <a href="/">Параметры</a>
-        <a href="/graphic">График</a>
-        <a href="/diagrams">Диаграммы</a>
-        <a href="/faks">Возмущения</a>
+    <header>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Параметры</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/graphic">График</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/diagrams">Диаграммы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/faks">Возмущения</a>
+            </li>
+        </ul>
     </header>
+    <div class="container-fluid row py-3 g-4">
+        <div class="col-lg-5">
+            <h5>Возмущения</h5>
+            <div class="container-scroll">
+                {% for x in range(4) %}
+                <div class="block-function">
+                    <span>R{{ loop.index }}(x)=</span>
+                    <input id="faks-{{ loop.index }}-1" type="text">
+                    <span>*x^3+</span>
+                    <input id="faks-{{ loop.index }}-2" type="text">
+                    <span>*x^2+</span>
+                    <input id="faks-{{ loop.index }}-3" type="text">
+                    <span>*x+</span>
+                    <input id="faks-{{ loop.index }}-4" type="text">
+                </div>
+                {% endfor %}
+            </div>
 
-    <h2>Возмущения</h2>
-    {% for x in range(4) %}
-    <div>
-        <span>R{{ loop.index }}(x)=</span>
-        <input id="faks-{{ loop.index }}-1" type="text">
-        <span>*x^3+</span>
-        <input id="faks-{{ loop.index }}-2" type="text">
-        <span>*x^2+</span>
-        <input id="faks-{{ loop.index }}-3" type="text">
-        <span>*x+</span>
-        <input id="faks-{{ loop.index }}-4" type="text">
+            <div class="mt-4">
+                <h5>Уравнения</h5>
+                <div class="container-scroll scroll-2">
+                    {% for x in range(55) %}
+                    <div class="block-function">
+                        <span>F{{ loop.index }}(x)=</span>
+                        <input id="equations-{{ loop.index }}-1" type="text">
+                        <span>*x^3+</span>
+                        <input id="equations-{{ loop.index }}-2" type="text">
+                        <span>*x^2+</span>
+                        <input id="equations-{{ loop.index }}-3" type="text">
+                        <span>*x+</span>
+                        <input id="equations-{{ loop.index }}-4" type="text">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <h5>Начальные уравнения</h5>
+            <div class="container-scroll scroll-1">
+                {% for x in initial_equations %}
+                <div class="block-function border-function">
+                    <div class="d-flex justify-content-between">
+                        <span>{{ x }}</span>
+                        <input id="init-eq-{{ loop.index }}" type="text">
+                    </div>
+                    <span> Ограничение: </span>
+                    <input id="restrictions-{{ loop.index }}" type="text" value="1.0">
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="mt-4">
+                <h5 class="mb-3">Управление</h5>
+                <span class="pe-3">Статус</span>
+                <input type="text" readonly id="status-input" class="me-3">
+                <button onclick="process()" class="px-2 mx-2">Вычислить</button>
+                <button onclick="refill()" class="px-2">Обновить значения</button>
+            </div>
+        </div>
     </div>
-    {% endfor %}
-
-    <h2>Начальные уравнения</h2>
-    {% for x in initial_equations %}
-    <div>
-        <span>{{ x }}</span>
-        <input id="init-eq-{{ loop.index }}" type="text">
-        <span> Ограничение: </span>
-        <input id="restrictions-{{ loop.index }}" type="text" value="1.0">
-    </div>
-    {% endfor %}
-
-    <h2>Уравнения</h2>
-    {% for x in range(55) %}
-    <div>
-        <span>F{{ loop.index }}(x)=</span>
-        <input id="equations-{{ loop.index }}-1" type="text">
-        <span>*x^3+</span>
-        <input id="equations-{{ loop.index }}-2" type="text">
-        <span>*x^2+</span>
-        <input id="equations-{{ loop.index }}-3" type="text">
-        <span>*x+</span>
-        <input id="equations-{{ loop.index }}-4" type="text">
-    </div>
-    {% endfor %}
-
-    <h2>Управление</h2>
-    <span>Статус</span>
-    <input type="text" readonly id="status-input">
-    <button onclick="process()">Вычислить</button>
-    <button onclick="refill()">Обновить значения</button>
 </div>
 <script src="/static/js/script.js"></script>
 </body>

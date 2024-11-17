@@ -26,16 +26,16 @@ def fill_diagrams(data, initial_equations, restrictions):
 
 
 def create_graphic(t, data, faks):
-    fig, axs = plt.subplots(figsize=(15, 10))
+    fig, axs = plt.subplots(figsize=(20, 12))
     plt.subplot(111)
     for i in range(15):
         plt.plot(t, data[:, i], color=lines[i][0], linestyle=lines[i][1], label=u_list[i])
     plt.xlabel("t")
-    plt.legend(loc=(.75, .64), labelspacing=0.1, fontsize='small')
-    # plt.draw()
     plt.xlim([0, 1])
+    plt.legend(loc='lower right', bbox_to_anchor=(1, 1), labelspacing=0.1, fontsize='small')
     draw_third_graphic(t, faks)
-    fig.savefig('./static/images/figure.png')
+    plt.tight_layout()
+    fig.savefig('./static/images/figure.png', bbox_inches='tight')
 
 
 def draw_third_graphic(t, faks):

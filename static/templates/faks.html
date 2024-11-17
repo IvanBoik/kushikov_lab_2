@@ -3,18 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Возмущения</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div>
-    <header style="{display: flex; flex-direction: row;}">
-        <a href="/">Параметры</a>
-        <a href="/graphic">График</a>
-        <a href="/diagrams">Диаграммы</a>
-        <a href="/faks">Возмущения</a>
+   <header>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Параметры</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/graphic">График</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/diagrams">Диаграммы</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/faks">Возмущения</a>
+          </li>
+        </ul>
     </header>
 
-    <div>
-        <img src="/static/images/figure2.png" id="faks-image">
+    <div class="container">
+        <img src="/static/images/figure2.png" id="faks-image" class="img-fluid">
     </div>
 </div>
 <script src="/static/js/faksChecker.js"></script>
