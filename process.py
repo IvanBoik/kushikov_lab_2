@@ -1,14 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import odeint
-import logging
 
 from functions import pend, r_1, r_2, r_3, r_4
 from radar_diagram import RadarDiagram
 from utils import lines
+import logging
 
+logger = logging.getLogger("uvicorn.error")
 data_sol = []
-logger = logging.getLogger('uvicorn.error')
 
 
 def fill_diagrams(data, initial_equations, restrictions):
@@ -29,9 +29,12 @@ def create_graphic(t, data, faks):
     fig, axs = plt.subplots(figsize=(20, 12))
     plt.subplot(111)
     for i in range(15):
-        plt.plot(t, data[:, i], color=lines[i][0], linestyle=lines[i][1], label=u_list[i])
-    plt.xlabel("t")
+        plt.plot(t, list(map(lambda elem: 0 if elem < 0 else elem, data[:, i])), color=lines[i][0],
+                 linestyle=lines[i][1], label=u_list[i])
+
+    plt.xlabel("t, время")
     plt.xlim([0, 1])
+    plt.ylim(bottom=0)
     plt.legend(loc='lower right', bbox_to_anchor=(1, 1), labelspacing=0.1, fontsize='small')
     draw_third_graphic(t, faks)
     plt.tight_layout()
@@ -57,7 +60,6 @@ def draw_third_graphic(t, faks):
     plt.plot(t, y4, label='R4')
     plt.legend(loc='best')
     plt.xlabel('t')
-    # plt.draw()
     fig.savefig("./static/images/figure2.png")
 
 
@@ -65,24 +67,17 @@ def cast_to_float(initial_equations, faks, equations, restrictions):
     for i in range(len(initial_equations)):
         initial_equations[i] = float(initial_equations[i])
 
-    logger.info("init_eq")
-
     for i in range(len(faks)):
         for j in range(len(faks[i])):
             faks[i][j] = float(faks[i][j])
-
-    logger.info("faks")
 
     for i in range(len(equations)):
         for j in range(len(equations[i])):
             equations[i][j] = float(equations[i][j])
 
-    logger.info("equations")
-
     for i in range(len(restrictions)):
         restrictions[i] = float(restrictions[i])
 
-    logger.info("restrictions")
     return initial_equations, faks, equations, restrictions
 
 
@@ -92,7 +87,7 @@ def process(initial_equations, faks, equations, restrictions):
     cast_to_float(initial_equations, faks, equations, restrictions)
 
     t = np.linspace(0, 1)
-    data_sol = odeint(pend, initial_equations, t, args=(faks, equations))
+    data_sol, d = odeint(pend, initial_equations, t, args=(faks, equations), full_output=True)
     create_graphic(t, data_sol, faks)
     fill_diagrams(data_sol, initial_equations, restrictions)
 

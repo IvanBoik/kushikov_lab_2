@@ -30,13 +30,13 @@
             <div class="container-scroll">
                 {% for x in range(4) %}
                 <div class="block-function">
-                    <span>R{{ loop.index }}(x)=</span>
+                    <span>R{{ loop.index }}(t)=</span>
                     <input id="faks-{{ loop.index }}-1" type="text">
-                    <span>*x^3+</span>
+                    <span>*t^3+</span>
                     <input id="faks-{{ loop.index }}-2" type="text">
-                    <span>*x^2+</span>
+                    <span>*t^2+</span>
                     <input id="faks-{{ loop.index }}-3" type="text">
-                    <span>*x+</span>
+                    <span>*t+</span>
                     <input id="faks-{{ loop.index }}-4" type="text">
                 </div>
                 {% endfor %}
@@ -47,13 +47,13 @@
                 <div class="container-scroll scroll-2">
                     {% for x in range(55) %}
                     <div class="block-function">
-                        <span>F{{ loop.index }}(x)=</span>
+                        <span>F{{ loop.index }}(k)=</span>
                         <input id="equations-{{ loop.index }}-1" type="text">
-                        <span>*x^3+</span>
+                        <span>*k^3+</span>
                         <input id="equations-{{ loop.index }}-2" type="text">
-                        <span>*x^2+</span>
+                        <span>*k^2+</span>
                         <input id="equations-{{ loop.index }}-3" type="text">
-                        <span>*x+</span>
+                        <span>*k+</span>
                         <input id="equations-{{ loop.index }}-4" type="text">
                     </div>
                     {% endfor %}
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="col-lg-7">
-            <h5>Начальные уравнения</h5>
+            <h5>Начальные условия</h5>
             <div class="container-scroll scroll-1">
                 {% for x in initial_equations %}
                 <div class="block-function border-function">
@@ -69,7 +69,7 @@
                         <span>{{ x }}</span>
                         <input id="init-eq-{{ loop.index }}" type="text">
                     </div>
-                    <span> Ограничение: </span>
+                    <span> Предельное значение: </span>
                     <input id="restrictions-{{ loop.index }}" type="text" value="1.0">
                 </div>
                 {% endfor %}

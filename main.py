@@ -4,6 +4,7 @@ from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request
+import logging
 
 from process import process, u_list
 
@@ -13,6 +14,8 @@ templates = Jinja2Templates(directory="static/templates")
 
 FAKS_COUNT = 4
 EQUATIONS_COUNT = 55
+
+logger = logging.getLogger("uvicorn.error")
 
 
 @app.get("/initial_equations")
